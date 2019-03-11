@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.enze.dao.mapper.wms.WmsStIoMapper" >
+    <resultMap id="TaskEntity" type="com.enze.entity.TaskEntity" >
+        <id column="taskname" property="taskname" jdbcType="VARCHAR" />
+        <result column="tasksize" property="tasksize" jdbcType="INTEGER" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        taskname,tasksize
+    </sql>
+
+    <!-- <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+	   FROM users
+    </select> -->
+
+
+    <select id="getTask" resultMap="TaskEntity" >
+    	select '待定' taskname, count(*)tasksize from   wms_st_io_doc a ,
+		wms_st_area_def m
+		 where a.areaid=m.areaid(+)
+		 and  a.operationtype=#{operationtype} and a.rfflag=#{rfflag} and m.areaflag=#{areaflag}
+    </select>
+    
+
+    <!-- <insert id="insert" parameterType="com.neo.entity.UserEntity" >
+       INSERT INTO 
+       		users
+       		(userName,passWord,user_sex) 
+       	VALUES
+       		(#{userName}, #{passWord}, #{userSex})
+    </insert>
+    
+    <update id="update" parameterType="com.neo.entity.UserEntity" >
+       UPDATE 
+       		users 
+       SET 
+       	<if test="userName != null">userName = #{userName},</if>
+       	<if test="passWord != null">passWord = #{passWord},</if>
+       	nick_name = #{nickName}
+       WHERE 
+       		id = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.Long" >
+       DELETE FROM
+       		 users 
+       WHERE 
+       		 id =#{id}
+    </delete> -->
+
+</mapper>

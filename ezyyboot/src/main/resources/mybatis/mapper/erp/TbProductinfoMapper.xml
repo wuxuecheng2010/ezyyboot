@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.enze.dao.mapper.erp.TbProductinfoMapper" >
+    <resultMap id="TbProductinfo" type="com.enze.entity.TbProductinfo" >
+        <id column="iproductid" property="iproductid" jdbcType="BIGINT" />
+        <result column="vcproductname" property="vcproductname" jdbcType="VARCHAR" />
+        <result column="vcproductcode" property="vcproductcode" jdbcType="VARCHAR" />
+        <result column="vcstandard" property="vcstandard" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        iproductid,vcproductname,vcproductcode,vcstandard
+    </sql>
+
+    <!-- <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+	   FROM users
+    </select> -->
+
+    <select id="getOne" parameterType="java.lang.Integer" resultMap="TbProductinfo" >
+        SELECT 
+       <include refid="Base_Column_List" />
+	   FROM tb_productinfo
+	   WHERE iproductid = #{iproductid}
+    </select>
+
+    <!-- <insert id="insert" parameterType="com.neo.entity.UserEntity" >
+       INSERT INTO 
+       		users
+       		(userName,passWord,user_sex) 
+       	VALUES
+       		(#{userName}, #{passWord}, #{userSex})
+    </insert>
+    
+    <update id="update" parameterType="com.neo.entity.UserEntity" >
+       UPDATE 
+       		users 
+       SET 
+       	<if test="userName != null">userName = #{userName},</if>
+       	<if test="passWord != null">passWord = #{passWord},</if>
+       	nick_name = #{nickName}
+       WHERE 
+       		id = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.Long" >
+       DELETE FROM
+       		 users 
+       WHERE 
+       		 id =#{id}
+    </delete> -->
+
+</mapper>
