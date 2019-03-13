@@ -2,7 +2,6 @@ function createOutWork(){
 	 // var layer = layui.layer;
 	//基于准备好的dom，初始化echarts实例
 	  var outwork = echarts.init(document.getElementById('outwork'));
-      var inwork= echarts.init(document.getElementById('inwork'));
 	  var kdata=[];
 	  var vdata=[];
 
