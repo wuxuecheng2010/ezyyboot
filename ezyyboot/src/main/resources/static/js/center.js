@@ -134,21 +134,24 @@ function createMap(){
 
 
 var socketSupportLogo="ws";
-
 function initSocket(socketServer){
 	
 	var websocket = null;
-	
+	var wsok="您的浏览器支持被动更新.";
+	var wsno="您的浏览器不支持被动更新.";
 	
 	if(typeof(WebSocket) == "undefined") {
-		console.log("您的浏览器不支持WebSocket");
-		$("#socketsupport").html('<span class="layui-badge" style="text-decoration:line-through;">'+socketSupportLogo+'</span>');
-	    $("#socketsupport").attr("title","您的浏览器不支持被动更新.");
+		console.log(wsno);
+		$("#socketsupport").html('<span style="text-decoration:line-through;">'+socketSupportLogo+'</span>');
+	    $("#socketsupport").attr("title",wsno);
+	    $("#socketsupport").addClass("layui-badge layui-bg-red");
+
 	}else{
-		console.log("您的浏览器支持WebSocket");
-		$("#socketsupport").html('<span class="layui-badge layui-bg-blue">'+socketSupportLogo+'</span>');
-		$("#socketsupport").attr("title","您的浏览器支持被动更新.");
-		//ws://localhost:端口/${server.servlet.context-path}/websocket服务端名称
+		console.log(wsok);
+		$("#socketsupport").html('<span >'+socketSupportLogo+'</span>');
+		$("#socketsupport").attr("title",wsok);
+		$("#socketsupport").addClass("layui-badge layui-bg-blue");
+
 		//websocket = new WebSocket("ws://192.168.0.117:8099/ezyyboot/websocket");
 		 websocket = new WebSocket(socketServer);
 		 //连接发生错误的回调方法
@@ -177,6 +180,9 @@ function initSocket(socketServer){
 				setMessageInnerHTML(msg);
 				break;
 			}
+	        
+	        wsFlash();
+
 	    }
 
 	    //连接关闭的回调方法
@@ -210,6 +216,33 @@ function closeWebSocket(){
 function send(){
     var message = document.getElementById('text').value;
     websocket.send(message);
+}
+
+//收到信息 闪一闪
+function wsFlash(){
+	var count=0;
+	var maxCount=7;
+	var className=$("#socketsupport").attr("class");
+	
+	var t1=window.setInterval(function(){
+		if(count>=maxCount){
+			window.clearInterval(t1);   	
+		}
+		$("#socketsupport").removeClass(className);
+		$("#socketsupport").addClass("layui-badge layui-bg-gray");
+		count++;
+	}, 200);
+	
+	var t2=window.setInterval(function(){
+		if(count>=maxCount){
+			window.clearInterval(t2);   
+		}
+		$("#socketsupport").removeClass("layui-badge layui-bg-gray");
+		$("#socketsupport").addClass(className);
+		count++;
+	}, 300);
+	
+	
 }
 
 
