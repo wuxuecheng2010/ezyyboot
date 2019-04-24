@@ -15,14 +15,14 @@
     <!-- <select id="getAll" resultMap="BaseResultMap"  >
        SELECT 
        <include refid="Base_Column_List" />
-	   FROM users
+	   FROM users #{iproductid}
     </select> -->
 
     <select id="getOne" parameterType="java.lang.Integer" resultMap="TbProductinfo" >
         SELECT 
        <include refid="Base_Column_List" />
 	   FROM tb_productinfo
-	   WHERE iproductid = #{iproductid}
+	   WHERE iproductid = 1670
     </select>
 
     <!-- <insert id="insert" parameterType="com.neo.entity.UserEntity" >

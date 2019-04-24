@@ -226,23 +226,40 @@ function wsFlash(){
 	
 	var t1=window.setInterval(function(){
 		if(count>=maxCount){
-			window.clearInterval(t1);   	
+			window.clearInterval(t1);
+			var _className=$("#socketsupport").attr("class");
+			if(_className!=className){
+				setFlashColor(className);
+			}
 		}
-		$("#socketsupport").removeClass(className);
-		$("#socketsupport").addClass("layui-badge layui-bg-gray");
+		delFlashColor(className);
 		count++;
 	}, 200);
 	
 	var t2=window.setInterval(function(){
 		if(count>=maxCount){
-			window.clearInterval(t2);   
+			window.clearInterval(t2); 
+			var _className=$("#socketsupport").attr("class");
+			if(_className!=className){
+				setFlashColor(className);
+			}
 		}
-		$("#socketsupport").removeClass("layui-badge layui-bg-gray");
-		$("#socketsupport").addClass(className);
+		setFlashColor(className);
 		count++;
 	}, 300);
 	
-	
 }
 
+function setFlashColor(className){
+	
+	$("#socketsupport").removeClass("layui-badge layui-bg-gray");
+	$("#socketsupport").addClass(className);
+	
+}
+function delFlashColor(className){
+	
+	$("#socketsupport").removeClass(className);
+	$("#socketsupport").addClass("layui-badge layui-bg-gray");
+	
+}
 
